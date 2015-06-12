@@ -2,7 +2,8 @@ var casper = require('casper').create();
 var fs = require('fs');
 
 var pageIndex = casper.cli.args[0];
-
+var fileName = casper.cli.args[1];
+    
 function getLinks() {
     var links = document.querySelectorAll('tr td:first-child a');
     return Array.prototype.map.call(links, function(e) {
@@ -18,7 +19,7 @@ casper.start('http://remediabuscador.mjusticia.gob.es/remediabuscador/avanzarRet
     this.echo(links);
     for (var id in links) {
         //this.echo(links[id]);
-        fs.write("mediadores-id.cvs", links[id]+'\n', 'a');
+        fs.write(fileName, links[id]+'\n', 'a');
     }
 });
 
